@@ -1,0 +1,21 @@
+Phần 1: Phân tích
+1. Tại sao mở bằng Notepad bị Not Responding:
+File 800MB quá to, Notepad nó là app GUI nên khi mở nó cố gắng nạp hết 800MB vào RAM một lúc để render ra giao diện. Vừa tốn RAM vừa phải đếm dòng, tô màu, nên nó bị treo luôn, không phải lỗi máy mà là do mở sai cách.
+
+2. Tại sao cat báo lỗi trong CMD:
+CMD truyền thống của Windows nó không có lệnh cat. Lệnh để xem file trong CMD là type. Gõ cat vào thì nó không hiểu nên báo command not found là đúng rồi. Đây là bẫy nhầm môi trường.
+
+3. Tại sao cat lại chạy được trong PowerShell:
+Vì trong PowerShell thì cat chỉ là cái tên viết tắt (alias) của lệnh gốc Get-Content thôi. Microsoft cố tình tạo alias giống Linux cho dân dev quen tay. Nên gõ cat trong PowerShell thì thực chất là đang chạy Get-Content.
+
+Phần 2: Bộ lệnh chuẩn trên PowerShell
+Giả sử file là server_log_800MB.log
+
+1. Xem toàn bộ nội dung tệp:
+powershell
+cat server_log_800MB.log
+
+
+2. Chỉ xem 10 dòng cuối 
+powershell
+Get-Content server_log_800MB.log -Tail 10
